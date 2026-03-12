@@ -13,11 +13,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue: #1A2E4A;
-            --blue-mid: #2A4470;
-            --blue-light: #3A5A8C;
-            --blue-pale: #E8EDF4;
-            --blue-wash: #F4F6FA;
+            --blue: #2D5EA6;
+            --blue-mid: #3A6DB8;
+            --blue-light: #4A7DC8;
+            --blue-pale: #E8F0FA;
+            --blue-wash: #F2F6FC;
+            --navy: #1A2E4A;
             --white: #FFFFFF;
             --off-white: #FAFBFC;
             --black: #111111;
@@ -60,7 +61,7 @@
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* Top Bar */
-        .top-bar { background: var(--blue); color: rgba(255,255,255,0.7); font-size: 0.78rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .top-bar { background: var(--navy); color: rgba(255,255,255,0.7); font-size: 0.78rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
         .top-bar-inner { display: flex; justify-content: space-between; align-items: center; }
         .top-bar a { color: rgba(255,255,255,0.9); font-weight: 500; }
         .top-bar-right { display: flex; gap: 24px; align-items: center; }
@@ -70,9 +71,9 @@
         /* Nav */
         .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--transition); }
         .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
-        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 120px; }
         .nav-logo { display: flex; align-items: center; gap: 14px; }
-        .nav-logo-icon { width: 40px; height: 40px; }
+        .nav-logo-icon { height: 160px; width: auto; }
         .nav-logo-text { display: flex; flex-direction: column; }
         .nav-logo-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--blue); line-height: 1.1; }
         .nav-logo-sub { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-top: 1px; }
@@ -86,14 +87,18 @@
         .nav-links .anytax-link { color: var(--blue); font-weight: 700; background: var(--blue-pale); padding: 8px 16px; border-radius: var(--radius); margin-left: 4px; }
         .nav-links .anytax-link::after { display: none; }
         .nav-links .anytax-link:hover { background: var(--blue); color: var(--white); }
-        .nav-cta { margin-left: 16px; padding: 10px 22px; font-size: 0.78rem; }
+        .nav-cta { margin-left: 12px; padding: 4px 10px; font-size: 0.6rem; letter-spacing: 0.03em; color: var(--white) !important; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
         .hamburger span { width: 22px; height: 2px; background: var(--blue); transition: all 0.3s; }
 
         /* Hero */
         .hero { position: relative; background: var(--white); padding: 40px 0 80px; overflow: hidden; }
-        .hero-rule { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--blue); }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
+        .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; }
+        .hero-slide.active { opacity: 1; }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.92); z-index: 1; }
+        .hero-rule { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--blue); z-index: 3; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
         .hero-text { max-width: 540px; }
         .hero-est { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); border: 1.5px solid var(--gray-200); padding: 6px 16px; margin-bottom: 28px; animation: fadeIn 0.6s ease forwards; }
         .hero h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); margin-bottom: 24px; animation: fadeIn 0.6s ease 0.1s forwards; opacity: 0; }
@@ -107,7 +112,7 @@
         .hero-stat-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-400); margin-top: 6px; text-transform: uppercase; }
 
         .hero-visual { position: relative; animation: fadeIn 0.8s ease 0.3s forwards; opacity: 0; }
-        .hero-card { background: var(--blue); padding: 44px 40px; position: relative; }
+        .hero-card { background: var(--navy); padding: 44px 40px; position: relative; }
         .hero-card::before { content: ''; position: absolute; top: -8px; left: -8px; right: 8px; bottom: 8px; border: 2px solid var(--blue); z-index: -1; }
         .hero-card-heading { font-family: 'Source Sans 3', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .hero-card-items { display: flex; flex-direction: column; gap: 0; }
@@ -123,7 +128,7 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Divider Band */
-        .divider-band { background: var(--blue); padding: 0; height: 56px; display: flex; align-items: center; overflow: hidden; }
+        .divider-band { background: var(--navy); padding: 0; height: 56px; display: flex; align-items: center; overflow: hidden; }
         .divider-band-inner { display: flex; align-items: center; gap: 48px; white-space: nowrap; animation: scroll-left 30s linear infinite; }
         .divider-band-item { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 12px; }
         .divider-band-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%; }
@@ -136,7 +141,7 @@
         .about-video { aspect-ratio: 16/10; background: var(--gray-100); overflow: hidden; border: 1px solid var(--gray-200); }
         .about-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
         .about-video-border { position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px; border: 2px solid var(--blue); z-index: -1; }
-        .about-experience-tag { position: absolute; bottom: -24px; right: 12px; background: var(--blue); color: var(--white); padding: 22px 28px; text-align: center; z-index: 2; }
+        .about-experience-tag { position: absolute; bottom: -24px; right: 12px; background: var(--navy); color: var(--white); padding: 22px 28px; text-align: center; z-index: 2; }
         .about-exp-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; line-height: 1; }
         .about-exp-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
         .about-text p { color: var(--gray-600); margin-bottom: 18px; font-size: 1rem; line-height: 1.8; }
@@ -160,7 +165,7 @@
         .service-card p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.75; }
 
         /* Why */
-        .why { padding: 110px 0; background: var(--blue); position: relative; overflow: hidden; }
+        .why { padding: 110px 0; background: var(--navy); position: relative; overflow: hidden; }
         .why-pattern { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; }
         .why-content { position: relative; z-index: 2; }
         .why-header { text-align: center; margin-bottom: 64px; }
@@ -210,7 +215,7 @@
 
         /* CTA */
         .cta { padding: 100px 0; background: var(--white); }
-        .cta-box { background: var(--blue); padding: 72px 80px; text-align: center; position: relative; overflow: hidden; }
+        .cta-box { background: var(--navy); padding: 72px 80px; text-align: center; position: relative; overflow: hidden; }
         .cta-box::before { content: ''; position: absolute; top: -6px; left: -6px; right: 6px; bottom: 6px; border: 2px solid var(--blue); z-index: 0; }
         .cta-box > * { position: relative; z-index: 1; }
         .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--white); margin-bottom: 16px; }
@@ -221,7 +226,7 @@
         .cta-phone a { color: var(--white); font-weight: 600; }
 
         /* Footer */
-        .footer { background: var(--black); padding: 72px 0 36px; }
+        .footer { background: var(--navy); padding: 72px 0 36px; }
         .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
         .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 14px; }
         .footer-brand-desc { font-size: 0.85rem; color: rgba(255,255,255,0.35); line-height: 1.75; }
@@ -294,10 +299,6 @@
     <div class="container nav-inner">
         <a href="index.html" class="nav-logo">
             <img class="nav-logo-icon" src="logo.png" alt="Trilogy Logo">
-            <div class="nav-logo-text">
-                <span class="nav-logo-name">Trilogy</span>
-                <span class="nav-logo-sub">Accountancy Services</span>
-            </div>
         </a>
         <div class="nav-links">
             <a href="index.html" class="active">Home</a>
@@ -330,6 +331,13 @@
 
 <!-- Hero -->
 <section class="hero">
+    <div class="hero-slideshow" id="heroSlideshow">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1600&q=80');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&q=80');"></div>
+        <div class="hero-overlay"></div>
+    </div>
     <div class="hero-rule"></div>
     <div class="container hero-grid">
         <div class="hero-text">
@@ -404,10 +412,15 @@
     <div class="container about-grid">
         <div class="about-video-wrap reveal">
             <div class="about-video">
-                <video controls preload="metadata">
-                    <source src="video.MOV" type="video/quicktime">
-                    Your browser does not support video.
-                </video>
+                <div style="position: relative; padding-top: 56.25%;">
+                    <iframe
+                        src="https://customer-w3eshzf2kramnqvl.cloudflarestream.com/1fb0d236eb17ecc8090f045900fa8936/iframe?muted=true&poster=https%3A%2F%2Fcustomer-w3eshzf2kramnqvl.cloudflarestream.com%2F1fb0d236eb17ecc8090f045900fa8936%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                        loading="lazy"
+                        style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowfullscreen="true"
+                    ></iframe>
+                </div>
             </div>
             <div class="about-video-border"></div>
             <div class="about-experience-tag">
@@ -598,6 +611,15 @@
         });
     }
     setTimeout(animateCounters, 600);
+
+    // Hero slideshow
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }, 5000);
 </script>
 
 </body>
