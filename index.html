@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilogy Accountancy Services | Wolverhampton Accountants</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #1A2E4A;
+            --blue-mid: #2A4470;
+            --blue-light: #3A5A8C;
+            --blue-pale: #E8EDF4;
+            --blue-wash: #F4F6FA;
+            --white: #FFFFFF;
+            --off-white: #FAFBFC;
+            --black: #111111;
+            --gray-100: #F5F6F7;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --text: #1A1A1A;
+            --radius: 4px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Source Sans 3', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; font-weight: 400; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.15; color: var(--blue); }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; }
+        ul { list-style: none; }
+        .container { max-width: 1160px; margin: 0 auto; padding: 0 40px; }
+
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; border-radius: var(--radius); border: none; cursor: pointer; transition: all var(--transition); text-transform: uppercase; }
+        .btn-primary { background: var(--blue); color: var(--white); }
+        .btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,46,74,0.25); }
+        .btn-outline-dark { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+        .btn-outline-dark:hover { background: var(--blue); color: var(--white); transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+        .btn-outline-light:hover { border-color: var(--white); background: var(--white); color: var(--blue); }
+        .btn-white { background: var(--white); color: var(--blue); }
+        .btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+
+        .section-label { font-family: 'Source Sans 3', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 14px; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.8rem); color: var(--blue); margin-bottom: 18px; }
+        .section-subtitle { font-size: 1.05rem; color: var(--gray-500); max-width: 540px; line-height: 1.8; }
+
+        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Top Bar */
+        .top-bar { background: var(--blue); color: rgba(255,255,255,0.7); font-size: 0.78rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .top-bar-inner { display: flex; justify-content: space-between; align-items: center; }
+        .top-bar a { color: rgba(255,255,255,0.9); font-weight: 500; }
+        .top-bar-right { display: flex; gap: 24px; align-items: center; }
+        .top-bar-item { display: flex; align-items: center; gap: 6px; }
+        .top-bar-item svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 2; }
+
+        /* Nav */
+        .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--transition); }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+        .nav-logo { display: flex; align-items: center; gap: 14px; }
+        .nav-logo-icon { width: 40px; height: 40px; }
+        .nav-logo-text { display: flex; flex-direction: column; }
+        .nav-logo-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--blue); line-height: 1.1; }
+        .nav-logo-sub { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); margin-top: 1px; }
+        .nav-links { display: flex; align-items: center; gap: 0; }
+        .nav-links a { font-size: 0.84rem; font-weight: 600; color: var(--gray-600); padding: 24px 18px; transition: all var(--transition); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 18px; right: 18px; height: 2px; background: var(--blue); transform: scaleX(0); transition: transform var(--transition); }
+        .nav-links a:hover { color: var(--blue); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+        .nav-links .active { color: var(--blue); }
+        .nav-links .active::after { transform: scaleX(1); }
+        .nav-links .anytax-link { color: var(--blue); font-weight: 700; background: var(--blue-pale); padding: 8px 16px; border-radius: var(--radius); margin-left: 4px; }
+        .nav-links .anytax-link::after { display: none; }
+        .nav-links .anytax-link:hover { background: var(--blue); color: var(--white); }
+        .nav-cta { margin-left: 16px; padding: 10px 22px; font-size: 0.78rem; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+        .hamburger span { width: 22px; height: 2px; background: var(--blue); transition: all 0.3s; }
+
+        /* Hero */
+        .hero { position: relative; background: var(--white); padding: 80px 0 100px; overflow: hidden; }
+        .hero-rule { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--blue); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero-text { max-width: 540px; }
+        .hero-est { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); border: 1.5px solid var(--gray-200); padding: 6px 16px; margin-bottom: 28px; animation: fadeIn 0.6s ease forwards; }
+        .hero h1 { font-size: clamp(2.6rem, 5vw, 3.8rem); margin-bottom: 24px; animation: fadeIn 0.6s ease 0.1s forwards; opacity: 0; }
+        .hero h1 em { font-style: italic; font-weight: 400; }
+        .hero-desc { font-size: 1.1rem; color: var(--gray-500); line-height: 1.85; margin-bottom: 36px; max-width: 460px; animation: fadeIn 0.6s ease 0.2s forwards; opacity: 0; }
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; animation: fadeIn 0.6s ease 0.3s forwards; opacity: 0; }
+        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1.5px solid var(--gray-200); animation: fadeIn 0.6s ease 0.4s forwards; opacity: 0; }
+        .hero-stat { padding: 24px; text-align: center; }
+        .hero-stat:not(:last-child) { border-right: 1.5px solid var(--gray-200); }
+        .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--blue); line-height: 1; }
+        .hero-stat-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-400); margin-top: 6px; text-transform: uppercase; }
+
+        .hero-visual { position: relative; animation: fadeIn 0.8s ease 0.3s forwards; opacity: 0; }
+        .hero-card { background: var(--blue); padding: 44px 40px; position: relative; }
+        .hero-card::before { content: ''; position: absolute; top: -8px; left: -8px; right: 8px; bottom: 8px; border: 2px solid var(--blue); z-index: -1; }
+        .hero-card-heading { font-family: 'Source Sans 3', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .hero-card-items { display: flex; flex-direction: column; gap: 0; }
+        .hero-card-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: all var(--transition); }
+        .hero-card-item:last-child { border-bottom: none; }
+        .hero-card-item:hover { padding-left: 8px; }
+        .hero-card-num { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: rgba(255,255,255,0.25); min-width: 28px; }
+        .hero-card-item-text { font-size: 0.95rem; font-weight: 500; color: var(--white); }
+        .hero-free-badge { position: absolute; bottom: -20px; right: -20px; background: var(--white); border: 2px solid var(--blue); padding: 18px 24px; text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        .hero-free-badge-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--blue); line-height: 1; }
+        .hero-free-badge-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-400); margin-top: 4px; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Divider Band */
+        .divider-band { background: var(--blue); padding: 0; height: 56px; display: flex; align-items: center; overflow: hidden; }
+        .divider-band-inner { display: flex; align-items: center; gap: 48px; white-space: nowrap; animation: scroll-left 30s linear infinite; }
+        .divider-band-item { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 12px; }
+        .divider-band-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.3); border-radius: 50%; }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* About */
+        .about { padding: 110px 0; background: var(--white); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .about-video-wrap { position: relative; }
+        .about-video { aspect-ratio: 16/10; background: var(--gray-100); overflow: hidden; border: 1px solid var(--gray-200); }
+        .about-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .about-video-border { position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px; border: 2px solid var(--blue); z-index: -1; }
+        .about-experience-tag { position: absolute; bottom: -24px; right: 12px; background: var(--blue); color: var(--white); padding: 22px 28px; text-align: center; z-index: 2; }
+        .about-exp-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; line-height: 1; }
+        .about-exp-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+        .about-text p { color: var(--gray-600); margin-bottom: 18px; font-size: 1rem; line-height: 1.8; }
+        .about-checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin: 28px 0 36px; }
+        .about-check { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: var(--gray-700); }
+        .about-check-icon { width: 20px; height: 20px; background: var(--blue); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .about-check-icon svg { width: 11px; height: 11px; stroke: var(--white); fill: none; stroke-width: 3; }
+
+        /* Services */
+        .services { padding: 110px 0; background: var(--blue-wash); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+        .services-header { text-align: center; max-width: 580px; margin: 0 auto 60px; }
+        .services-header .section-subtitle { margin: 0 auto; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); }
+        .service-card { background: var(--white); padding: 40px 32px; transition: all var(--transition); position: relative; }
+        .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transition: transform var(--transition); }
+        .service-card:hover { background: var(--blue-wash); }
+        .service-card:hover::after { transform: scaleX(1); }
+        .service-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--blue-pale); line-height: 1; margin-bottom: 20px; transition: color var(--transition); }
+        .service-card:hover .service-num { color: var(--blue); opacity: 0.2; }
+        .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+        .service-card p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.75; }
+
+        /* Why */
+        .why { padding: 110px 0; background: var(--blue); position: relative; overflow: hidden; }
+        .why-pattern { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; }
+        .why-content { position: relative; z-index: 2; }
+        .why-header { text-align: center; margin-bottom: 64px; }
+        .why-header .section-label { color: rgba(255,255,255,0.35); }
+        .why-header .section-title { color: var(--white); }
+        .why-header .section-subtitle { color: rgba(255,255,255,0.45); margin: 0 auto; }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(255,255,255,0.08); }
+        .why-card { padding: 44px 28px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); transition: all var(--transition); }
+        .why-card:last-child { border-right: none; }
+        .why-card:hover { background: rgba(255,255,255,0.04); }
+        .why-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: rgba(255,255,255,0.15); margin-bottom: 16px; }
+        .why-card h4 { font-size: 1.05rem; color: var(--white); margin-bottom: 10px; }
+        .why-card p { font-size: 0.84rem; color: rgba(255,255,255,0.4); line-height: 1.7; }
+
+        /* AnyTax */
+        .anytax { padding: 110px 0; background: var(--white); }
+        .anytax-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .anytax-badge { display: inline-flex; align-items: center; gap: 8px; padding: 5px 14px; border: 1.5px solid var(--blue); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
+        .anytax-badge .dot { width: 6px; height: 6px; background: #22C55E; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .anytax h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 18px; }
+        .anytax h2 em { font-weight: 400; font-style: italic; }
+        .anytax-desc { font-size: 1.05rem; color: var(--gray-500); line-height: 1.85; margin-bottom: 32px; max-width: 460px; }
+        .anytax-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+        .anytax-feature { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 600; color: var(--gray-700); }
+        .anytax-feature-icon { width: 24px; height: 24px; background: var(--blue); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .anytax-feature-icon svg { width: 12px; height: 12px; stroke: var(--white); fill: none; stroke-width: 3; }
+        .anytax-mockup { background: var(--off-white); border: 1.5px solid var(--gray-200); padding: 0; position: relative; }
+        .anytax-mockup-bar { background: var(--blue); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .anytax-mockup-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+        .anytax-mockup-logo span { font-weight: 400; font-style: italic; }
+        .anytax-mockup-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); background: var(--white); padding: 3px 10px; }
+        .anytax-mockup-body { padding: 28px 24px; }
+        .anytax-mockup-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--gray-200); }
+        .anytax-mockup-row:last-child { border-bottom: none; }
+        .anytax-mockup-label { font-size: 0.84rem; color: var(--gray-500); }
+        .anytax-mockup-value { font-size: 0.88rem; font-weight: 700; color: var(--blue); }
+        .anytax-mockup-value.positive { color: #16A34A; }
+        .anytax-mockup-border { position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px; border: 2px solid var(--blue); z-index: -1; }
+
+        /* Testimonial */
+        .testimonial-band { padding: 80px 0; background: var(--blue-wash); border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); text-align: center; }
+        .testimonial-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-style: italic; color: var(--blue); max-width: 700px; margin: 0 auto 24px; line-height: 1.6; }
+        .testimonial-attr { font-size: 0.82rem; font-weight: 600; color: var(--gray-400); letter-spacing: 0.08em; text-transform: uppercase; }
+        .testimonial-stars { margin-bottom: 20px; display: flex; justify-content: center; gap: 4px; }
+        .testimonial-stars svg { width: 18px; height: 18px; fill: var(--blue); }
+
+        /* CTA */
+        .cta { padding: 100px 0; background: var(--white); }
+        .cta-box { background: var(--blue); padding: 72px 80px; text-align: center; position: relative; overflow: hidden; }
+        .cta-box::before { content: ''; position: absolute; top: -6px; left: -6px; right: 6px; bottom: 6px; border: 2px solid var(--blue); z-index: 0; }
+        .cta-box > * { position: relative; z-index: 1; }
+        .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--white); margin-bottom: 16px; }
+        .cta-box h2 em { font-weight: 400; font-style: italic; }
+        .cta-desc { font-size: 1.05rem; color: rgba(255,255,255,0.5); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+        .cta-phone { margin-top: 24px; font-size: 0.84rem; color: rgba(255,255,255,0.35); }
+        .cta-phone a { color: var(--white); font-weight: 600; }
+
+        /* Footer */
+        .footer { background: var(--black); padding: 72px 0 36px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+        .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+        .footer-brand-desc { font-size: 0.85rem; color: rgba(255,255,255,0.35); line-height: 1.75; }
+        .footer-col-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 22px; }
+        .footer-col a, .footer-col p { display: block; font-size: 0.86rem; color: rgba(255,255,255,0.45); margin-bottom: 12px; transition: color var(--transition); }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+
+        /* Mobile Nav */
+        .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .mobile-nav.open { opacity: 1; pointer-events: all; }
+        .mobile-nav a { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue); }
+        .mobile-nav a:hover { opacity: 0.6; }
+        .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; }
+        .mobile-nav-close svg { width: 28px; height: 28px; stroke: var(--blue); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container { padding: 0 28px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+            .hero-visual { max-width: 480px; }
+            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .anytax-grid { grid-template-columns: 1fr; gap: 48px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-card { border-bottom: 1px solid rgba(255,255,255,0.08); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+        }
+        @media (max-width: 768px) {
+            .top-bar { display: none; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .mobile-nav { display: flex; }
+            .services-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .why-card { border-right: none; }
+            .cta-box { padding: 48px 24px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+            .about-experience-tag { bottom: -16px; right: 0; }
+            .hero-free-badge { right: 0; bottom: -12px; }
+            .hero-stats { grid-template-columns: 1fr; }
+            .hero-stat:not(:last-child) { border-right: none; border-bottom: 1.5px solid var(--gray-200); }
+        }
+        @media (max-width: 480px) { .about-checklist { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="container top-bar-inner">
+        <span>Trilogy Accountancy Services Limited &mdash; Wolverhampton</span>
+        <div class="top-bar-right">
+            <div class="top-bar-item">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <a href="tel:01902451222">01902 451 222</a>
+            </div>
+            <div class="top-bar-item">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:mail@trilogyltd.co.uk">mail@trilogyltd.co.uk</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+    <div class="container nav-inner">
+        <a href="index.html" class="nav-logo">
+            <svg class="nav-logo-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" stroke="#1A2E4A" stroke-width="2.8" stroke-linecap="round">
+                    <path d="M30 8 C18 8, 10 20, 15 32 C20 44, 30 48, 30 48"/>
+                    <path d="M30 8 C42 8, 50 20, 45 32 C40 44, 30 48, 30 48"/>
+                    <path d="M15 32 C12 22, 20 12, 30 14 C40 16, 48 26, 45 32"/>
+                    <circle cx="30" cy="28" r="5" fill="#E8EDF4" stroke="#1A2E4A" stroke-width="2"/>
+                </g>
+            </svg>
+            <div class="nav-logo-text">
+                <span class="nav-logo-name">Trilogy</span>
+                <span class="nav-logo-sub">Accountancy Services</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="faq.html">FAQ</a>
+            <a href="responsibility.html">Responsibility</a>
+            <a href="anytax.html" class="anytax-link">AnyTax</a>
+            <a href="contact.html" class="btn btn-primary nav-cta">Get in Touch</a>
+        </div>
+        <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobile()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="index.html" onclick="toggleMobile()">Home</a>
+    <a href="about.html" onclick="toggleMobile()">About</a>
+    <a href="services.html" onclick="toggleMobile()">Services</a>
+    <a href="anytax.html" onclick="toggleMobile()">AnyTax</a>
+    <a href="faq.html" onclick="toggleMobile()">FAQ</a>
+    <a href="responsibility.html" onclick="toggleMobile()">Responsibility</a>
+    <a href="contact.html" onclick="toggleMobile()">Contact</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-rule"></div>
+    <div class="container hero-grid">
+        <div class="hero-text">
+            <div class="hero-est">Est. 2008 &bull; Wolverhampton</div>
+            <h1>Precision accounting for <em>ambitious</em> businesses</h1>
+            <p class="hero-desc">We reduce your tax burden, prepare meticulous accounts, and deliver priceless business planning advice. Personal service, professional results.</p>
+            <div class="hero-actions">
+                <a href="contact.html" class="btn btn-primary">Book Free Consultation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <a href="services.html" class="btn btn-outline-dark">View Services</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">34+</div>
+                    <div class="hero-stat-label">Years Experience</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">100%</div>
+                    <div class="hero-stat-label">Client Satisfaction</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">90%</div>
+                    <div class="hero-stat-label">Referral Rate</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-card">
+                <div class="hero-card-heading">What We Do</div>
+                <div class="hero-card-items">
+                    <div class="hero-card-item"><span class="hero-card-num">01</span><span class="hero-card-item-text">Tax Planning &amp; Returns</span></div>
+                    <div class="hero-card-item"><span class="hero-card-num">02</span><span class="hero-card-item-text">Annual &amp; Management Accounts</span></div>
+                    <div class="hero-card-item"><span class="hero-card-num">03</span><span class="hero-card-item-text">VAT Returns &amp; Payroll</span></div>
+                    <div class="hero-card-item"><span class="hero-card-num">04</span><span class="hero-card-item-text">Bookkeeping Services</span></div>
+                    <div class="hero-card-item"><span class="hero-card-num">05</span><span class="hero-card-item-text">Business Consultancy</span></div>
+                    <div class="hero-card-item"><span class="hero-card-num">06</span><span class="hero-card-item-text">Self-Assessment</span></div>
+                </div>
+            </div>
+            <div class="hero-free-badge">
+                <div class="hero-free-badge-num">Free</div>
+                <div class="hero-free-badge-label">Initial Consultation</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scrolling Band -->
+<div class="divider-band">
+    <div style="overflow:hidden;width:100%;">
+        <div class="divider-band-inner">
+            <span class="divider-band-item">Tax Planning <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Self-Assessment <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">VAT Returns <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Payroll <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Bookkeeping <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Consultancy <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Annual Accounts <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Management Accounts <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Tax Planning <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Self-Assessment <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">VAT Returns <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Payroll <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Bookkeeping <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Consultancy <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Annual Accounts <span class="divider-band-dot"></span></span>
+            <span class="divider-band-item">Management Accounts <span class="divider-band-dot"></span></span>
+        </div>
+    </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+    <div class="container about-grid">
+        <div class="about-video-wrap reveal">
+            <div class="about-video">
+                <video controls preload="metadata">
+                    <source src="raj.mp4" type="video/mp4">
+                    Your browser does not support video.
+                </video>
+            </div>
+            <div class="about-video-border"></div>
+            <div class="about-experience-tag">
+                <div class="about-exp-num">34+</div>
+                <div class="about-exp-label">Years of Expertise</div>
+            </div>
+        </div>
+        <div class="about-text reveal">
+            <div class="section-label">About Trilogy</div>
+            <h2 class="section-title">A personal service built on trust</h2>
+            <p>Trilogy Accountancy Services Limited is based in Wolverhampton, established in January 2008. We are a small, family-run practice where relationships are close, friendly, and thoroughly professional.</p>
+            <p>Our director brings over 30 years of experience, and our dedicated team tailors every engagement to each client's requirements. 90% of our new clients come through existing client recommendations.</p>
+            <div class="about-checklist">
+                <div class="about-check"><div class="about-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Specialist Accountants</div>
+                <div class="about-check"><div class="about-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Tailored Service</div>
+                <div class="about-check"><div class="about-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Free Initial Consultation</div>
+                <div class="about-check"><div class="about-check-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Clients Across the UK</div>
+            </div>
+            <a href="about.html" class="btn btn-primary">More About Us <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+    <div class="container">
+        <div class="services-header reveal">
+            <div class="section-label">Our Services</div>
+            <h2 class="section-title">Everything your business needs</h2>
+            <p class="section-subtitle">From tax planning to bookkeeping, we provide comprehensive accountancy services tailored to your goals.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal"><div class="service-num">01</div><h3>Tax Planning</h3><p>We go beyond returns &mdash; actively advising your business year-round for peak tax efficiency with decades of experience.</p></div>
+            <div class="service-card reveal"><div class="service-num">02</div><h3>Annual Accounts</h3><p>Year-end accounts preparation with full discussion of performance, prospects, and opportunities for growth.</p></div>
+            <div class="service-card reveal"><div class="service-num">03</div><h3>VAT Returns</h3><p>Returns prepared and submitted on time, every time. We navigate complex VAT legislation so you never face a fine.</p></div>
+            <div class="service-card reveal"><div class="service-num">04</div><h3>Payroll</h3><p>Accurate and timely payroll, ensuring your team is paid correctly and all obligations to HMRC are met.</p></div>
+            <div class="service-card reveal"><div class="service-num">05</div><h3>Bookkeeping</h3><p>Financial records maintained accurately and professionally &mdash; stop worrying about admin and focus on running your business.</p></div>
+            <div class="service-card reveal"><div class="service-num">06</div><h3>Business Consultancy</h3><p>Trusted guidance on risk management, pricing, marketing, and internal controls &mdash; helping you grow smarter.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Trilogy -->
+<section class="why">
+    <div class="why-pattern"></div>
+    <div class="container why-content">
+        <div class="why-header reveal">
+            <div class="section-label">Why Choose Us</div>
+            <h2 class="section-title">Built on results, powered by relationships</h2>
+            <p class="section-subtitle">We ensure everyone is in the right position, well motivated, and properly rewarded &mdash; because when your people want to come to work, success happens.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal"><div class="why-num">01</div><h4>Personal Service</h4><p>Every client receives a tailored experience. We understand your requirements before we begin.</p></div>
+            <div class="why-card reveal"><div class="why-num">02</div><h4>Tax Efficiency</h4><p>We actively reduce your tax burden through year-round strategic planning, not just return preparation.</p></div>
+            <div class="why-card reveal"><div class="why-num">03</div><h4>Affordable Rates</h4><p>Professional expertise without inflated prices. Outstanding service that growing businesses can afford.</p></div>
+            <div class="why-card reveal"><div class="why-num">04</div><h4>All Industries</h4><p>From sole traders to limited companies, we personalise the process for every business background.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- AnyTax -->
+<section class="anytax" id="anytax">
+    <div class="container anytax-grid">
+        <div class="reveal">
+            <div class="anytax-badge"><span class="dot"></span> In Development</div>
+            <h2>Introducing <em>AnyTax</em></h2>
+            <p class="anytax-desc">We're building AnyTax &mdash; powerful, intuitive tax software to simplify self-assessment, automate calculations, and keep businesses compliant. Built by accountants, for everyone.</p>
+            <div class="anytax-features">
+                <div class="anytax-feature"><div class="anytax-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Automated tax calculations &amp; filing</div>
+                <div class="anytax-feature"><div class="anytax-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Real-time compliance tracking</div>
+                <div class="anytax-feature"><div class="anytax-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Designed for UK small businesses</div>
+                <div class="anytax-feature"><div class="anytax-feature-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Expert support from the Trilogy team</div>
+            </div>
+            <a href="anytax.html" class="btn btn-primary">Learn More About AnyTax <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="anytax-visual reveal">
+            <div class="anytax-mockup">
+                <div class="anytax-mockup-bar">
+                    <div class="anytax-mockup-logo">Any<span>Tax</span></div>
+                    <div class="anytax-mockup-tag">Beta</div>
+                </div>
+                <div class="anytax-mockup-body">
+                    <div class="anytax-mockup-row"><span class="anytax-mockup-label">Gross Income</span><span class="anytax-mockup-value">&pound;82,400.00</span></div>
+                    <div class="anytax-mockup-row"><span class="anytax-mockup-label">Allowable Expenses</span><span class="anytax-mockup-value">&pound;24,150.00</span></div>
+                    <div class="anytax-mockup-row"><span class="anytax-mockup-label">Taxable Profit</span><span class="anytax-mockup-value">&pound;58,250.00</span></div>
+                    <div class="anytax-mockup-row"><span class="anytax-mockup-label">Tax Liability</span><span class="anytax-mockup-value">&pound;11,458.00</span></div>
+                    <div class="anytax-mockup-row"><span class="anytax-mockup-label">Potential Savings</span><span class="anytax-mockup-value positive">+ &pound;3,240.00</span></div>
+                </div>
+            </div>
+            <div class="anytax-mockup-border"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial -->
+<section class="testimonial-band">
+    <div class="container reveal">
+        <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-quote">&ldquo;Trilogy have looked after our accounts for years. Professional, friendly, and always available when we need advice. We wouldn't go anywhere else.&rdquo;</p>
+        <span class="testimonial-attr">Satisfied Client &mdash; Wolverhampton</span>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="container">
+        <div class="cta-box reveal">
+            <h2>Ready to take control of your <em>finances</em>?</h2>
+            <p class="cta-desc">Book your free initial consultation today. Let's discuss your needs and show you how Trilogy can make a real difference.</p>
+            <div class="cta-actions">
+                <a href="contact.html" class="btn btn-white">Book Free Consultation</a>
+                <a href="tel:01902451222" class="btn btn-outline-light">Call 01902 451 222</a>
+            </div>
+            <p class="cta-phone">Or email us at <a href="mailto:mail@trilogyltd.co.uk">mail@trilogyltd.co.uk</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand-name">Trilogy</div>
+                <p class="footer-brand-desc">A small, family-run accountancy practice based in Wolverhampton with over 34 years of experience serving clients across the United Kingdom.</p>
+            </div>
+            <div class="footer-col">
+                <div class="footer-col-title">Services</div>
+                <a href="services.html">Tax Planning</a>
+                <a href="services.html">Annual Accounts</a>
+                <a href="services.html">VAT Returns</a>
+                <a href="services.html">Payroll</a>
+                <a href="services.html">Bookkeeping</a>
+                <a href="services.html">Consultancy</a>
+            </div>
+            <div class="footer-col">
+                <div class="footer-col-title">Company</div>
+                <a href="about.html">About Us</a>
+                <a href="faq.html">FAQ</a>
+                <a href="responsibility.html">Corporate Responsibility</a>
+                <a href="anytax.html">AnyTax</a>
+            </div>
+            <div class="footer-col">
+                <div class="footer-col-title">Contact</div>
+                <p>9 Church St, Wolverhampton<br>WV11 1SR, United Kingdom</p>
+                <a href="tel:01902451222">01902 451 222</a>
+                <a href="mailto:mail@trilogyltd.co.uk">mail@trilogyltd.co.uk</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="footer-copy">&copy; 2025 Trilogy Accountancy Services Limited. All rights reserved.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+    function toggleMobile() {
+        document.getElementById('mobileNav').classList.toggle('open');
+        document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
+    }
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 60); observer.unobserve(entry.target); }
+        });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+    function animateCounters() {
+        document.querySelectorAll('.hero-stat-num').forEach(el => {
+            const text = el.textContent;
+            const num = parseInt(text);
+            const suffix = text.replace(/[0-9]/g, '');
+            let current = 0;
+            const step = Math.ceil(num / 35);
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= num) { current = num; clearInterval(timer); }
+                el.textContent = current + suffix;
+            }, 30);
+        });
+    }
+    setTimeout(animateCounters, 600);
+</script>
+
+</body>
+</html>
