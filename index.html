@@ -244,6 +244,10 @@
         .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; }
         .mobile-nav-close svg { width: 28px; height: 28px; stroke: var(--blue); }
 
+        /* Toast */
+        .toast { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--navy); color: var(--white); padding: 14px 32px; font-size: 0.9rem; font-weight: 600; border-radius: var(--radius); z-index: 10000; opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .container { padding: 0 28px; }
@@ -620,7 +624,25 @@
         currentSlide = (currentSlide + 1) % slides.length;
         slides[currentSlide].classList.add('active');
     }, 5000);
+
+    // Coming soon toast for all page links
+    const toast = document.getElementById('toast');
+    let toastTimeout;
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (!href) return;
+        // Allow: anchors, tel, mailto, index.html (current page), and external URLs
+        if (href.startsWith('#') || href.startsWith('tel:') || href.startsWith('mailto:') || href === 'index.html') return;
+        e.preventDefault();
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+    });
 </script>
+
+<div class="toast" id="toast">Coming Soon</div>
 
 </body>
 </html>
