@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Responsibility | Trilogy Accountancy Services</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --blue: #2D5EA6; --blue-mid: #3A6DB8; --blue-light: #4A7DC8; --blue-pale: #E8F0FA; --blue-wash: #F2F6FC; --navy: #1A2E4A; --white: #FFFFFF; --off-white: #FAFBFC; --black: #111111; --gray-100: #F5F6F7; --gray-200: #E5E7EB; --gray-300: #D1D5DB; --gray-400: #9CA3AF; --gray-500: #6B7280; --gray-600: #4B5563; --gray-700: #374151; --gray-800: #1F2937; --text: #1A1A1A; --radius: 4px; --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Source Sans 3', sans-serif; color: var(--text); background: var(--white); line-height: 1.7; font-weight: 400; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; line-height: 1.15; color: var(--blue); }
+        a { text-decoration: none; color: inherit; } img { max-width: 100%; } ul { list-style: none; }
+        .container { max-width: 1160px; margin: 0 auto; padding: 0 40px; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.06em; border-radius: var(--radius); border: none; cursor: pointer; transition: all var(--transition); text-transform: uppercase; }
+        .btn-primary { background: var(--blue); color: var(--white); }
+        .btn-primary:hover { background: var(--blue-mid); transform: translateY(-2px); }
+        .btn-outline-light { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4); }
+        .btn-outline-light:hover { border-color: var(--white); background: var(--white); color: var(--blue); }
+        .btn-white { background: var(--white); color: var(--blue); }
+        .btn-white:hover { background: var(--blue-pale); transform: translateY(-2px); }
+        .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .top-bar { background: var(--navy); color: rgba(255,255,255,0.7); font-size: 0.78rem; padding: 8px 0; }
+        .top-bar-inner { display: flex; justify-content: space-between; align-items: center; }
+        .top-bar a { color: rgba(255,255,255,0.9); font-weight: 500; }
+        .top-bar-right { display: flex; gap: 24px; align-items: center; }
+        .top-bar-item { display: flex; align-items: center; gap: 6px; }
+        .top-bar-item svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 2; }
+        .nav { position: sticky; top: 0; z-index: 1000; background: var(--white); border-bottom: 1px solid var(--gray-200); transition: box-shadow var(--transition); }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 120px; }
+        .nav-logo { display: flex; align-items: center; gap: 14px; }
+        .nav-logo-icon { height: 160px; width: auto; }
+        .nav-links { display: flex; align-items: center; gap: 0; }
+        .nav-links a { font-size: 0.84rem; font-weight: 600; color: var(--gray-600); padding: 24px 18px; transition: all var(--transition); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 18px; right: 18px; height: 2px; background: var(--blue); transform: scaleX(0); transition: transform var(--transition); }
+        .nav-links a:hover { color: var(--blue); } .nav-links a:hover::after { transform: scaleX(1); }
+        .nav-links .active { color: var(--blue); } .nav-links .active::after { transform: scaleX(1); }
+        .nav-links .anytax-link { color: var(--blue); font-weight: 700; background: var(--blue-pale); padding: 8px 16px; border-radius: var(--radius); margin-left: 4px; }
+        .nav-links .anytax-link::after { display: none; } .nav-links .anytax-link:hover { background: var(--blue); color: var(--white); }
+        .nav-cta { margin-left: 12px; padding: 4px 10px; font-size: 0.6rem; letter-spacing: 0.03em; color: var(--white) !important; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+        .hamburger span { width: 22px; height: 2px; background: var(--blue); transition: all 0.3s; }
+        .page-header { background: var(--navy); padding: 80px 0; text-align: center; }
+        .page-header h1 { color: var(--white); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
+        .page-header p { color: rgba(255,255,255,0.5); font-size: 1.05rem; }
+        .page-content { padding: 80px 0; }
+        .page-content p { color: var(--gray-600); font-size: 1rem; line-height: 1.85; margin-bottom: 20px; }
+        .page-content h2 { margin-bottom: 20px; margin-top: 48px; }
+        .page-content h2:first-child { margin-top: 0; }
+        .pillars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin: 48px 0; }
+        .pillar-card { background: var(--blue-wash); padding: 32px; border: 1px solid var(--gray-200); }
+        .pillar-card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+        .pillar-card p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.75; margin-bottom: 0; }
+        .cta { padding: 100px 0; background: var(--white); }
+        .cta-box { background: var(--navy); padding: 72px 80px; text-align: center; position: relative; overflow: hidden; }
+        .cta-box::before { content: ''; position: absolute; top: -6px; left: -6px; right: 6px; bottom: 6px; border: 2px solid var(--blue); z-index: 0; }
+        .cta-box > * { position: relative; z-index: 1; }
+        .cta-box h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--white); margin-bottom: 16px; }
+        .cta-box h2 em { font-weight: 400; font-style: italic; }
+        .cta-desc { font-size: 1.05rem; color: rgba(255,255,255,0.5); margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+        .cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+        .cta-phone { margin-top: 24px; font-size: 0.84rem; color: rgba(255,255,255,0.35); }
+        .cta-phone a { color: var(--white); font-weight: 600; }
+        .footer { background: var(--navy); padding: 72px 0 36px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+        .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+        .footer-brand-desc { font-size: 0.85rem; color: rgba(255,255,255,0.35); line-height: 1.75; }
+        .footer-col-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 22px; }
+        .footer-col a, .footer-col p { display: block; font-size: 0.86rem; color: rgba(255,255,255,0.45); margin-bottom: 12px; transition: color var(--transition); }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+        .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+        .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: 28px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .mobile-nav.open { opacity: 1; pointer-events: all; }
+        .mobile-nav a { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue); }
+        .mobile-nav a:hover { opacity: 0.6; }
+        .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; cursor: pointer; }
+        .mobile-nav-close svg { width: 28px; height: 28px; stroke: var(--blue); }
+        @media (max-width: 1024px) { .container { padding: 0 28px; } .pillars-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; } }
+        @media (max-width: 768px) { .top-bar { display: none; } .nav-links { display: none; } .hamburger { display: flex; } .mobile-nav { display: flex; } .cta-box { padding: 48px 24px; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 14px; text-align: center; } }
+    </style>
+</head>
+<body>
+
+<div class="top-bar"><div class="container top-bar-inner"><span>Trilogy Accountancy Services Limited &mdash; Wolverhampton</span><div class="top-bar-right"><div class="top-bar-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:01902451222">01902 451 222</a></div><div class="top-bar-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:mail@trilogyltd.co.uk">mail@trilogyltd.co.uk</a></div></div></div></div>
+
+<nav class="nav" id="nav"><div class="container nav-inner"><a href="/" class="nav-logo"><img class="nav-logo-icon" src="logo.png" alt="Trilogy Logo"></a><div class="nav-links"><a href="/">Home</a><a href="about">About</a><a href="services">Services</a><a href="faq">FAQ</a><a href="responsibility" class="active">Responsibility</a><a href="/#anytax" class="anytax-link">AnyTax</a><a href="contact" class="btn btn-primary nav-cta">Get in Touch</a></div><button class="hamburger" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+
+<div class="mobile-nav" id="mobileNav"><button class="mobile-nav-close" onclick="toggleMobile()"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button><a href="/" onclick="toggleMobile()">Home</a><a href="about" onclick="toggleMobile()">About</a><a href="services" onclick="toggleMobile()">Services</a><a href="/#anytax" onclick="toggleMobile()">AnyTax</a><a href="faq" onclick="toggleMobile()">FAQ</a><a href="responsibility" onclick="toggleMobile()">Responsibility</a><a href="contact" onclick="toggleMobile()">Contact</a></div>
+
+<section class="page-header"><div class="container"><h1>Corporate Responsibility</h1><p>Our commitment to ethical practice, community, and sustainability</p></div></section>
+
+<section class="page-content">
+    <div class="container">
+        <h2>Our Commitment</h2>
+        <p>At Trilogy Accountancy Services, we believe that being a responsible business goes beyond delivering excellent service to our clients. We are committed to operating ethically, supporting our local community, and minimising our environmental impact.</p>
+        <p>As a family-run practice, we take personal pride in the way we conduct our business. Every decision we make is guided by integrity, fairness, and a genuine desire to make a positive difference.</p>
+
+        <h2>Our Pillars</h2>
+        <div class="pillars-grid">
+            <div class="pillar-card reveal">
+                <h3>Ethical Practice</h3>
+                <p>We adhere to the highest professional and ethical standards. Transparency, honesty, and compliance are non-negotiable in everything we do. We are fully committed to anti-money laundering regulations and data protection.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <h3>Community Support</h3>
+                <p>We actively support local businesses and community organisations in Wolverhampton and the wider West Midlands. We believe in giving back to the community that has supported us for over 15 years.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <h3>Environmental Awareness</h3>
+                <p>We are committed to reducing our environmental footprint. We embrace digital processes, minimise paper usage, and encourage our clients to adopt cloud-based and paperless solutions.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <h3>People &amp; Wellbeing</h3>
+                <p>We ensure everyone in our team is in the right position, well motivated, and properly rewarded. When people want to come to work, success follows naturally.</p>
+            </div>
+        </div>
+
+        <h2>Looking Forward</h2>
+        <p>We are continuously looking for ways to improve our social and environmental impact. As we grow, we remain committed to maintaining the personal, ethical approach that has defined Trilogy since 2008.</p>
+        <p>We welcome feedback from our clients and community on how we can do better. If you have any suggestions, please don't hesitate to get in touch.</p>
+    </div>
+</section>
+
+<section class="cta"><div class="container"><div class="cta-box reveal"><h2>Want to know <em>more</em>?</h2><p class="cta-desc">We're always happy to discuss our approach to responsible business. Get in touch today.</p><div class="cta-actions"><a href="contact" class="btn btn-white">Contact Us</a><a href="tel:01902451222" class="btn btn-outline-light">Call 01902 451 222</a></div><p class="cta-phone">Or email us at <a href="mailto:mail@trilogyltd.co.uk">mail@trilogyltd.co.uk</a></p></div></div></section>
+
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="footer-brand-name">Trilogy</div><p class="footer-brand-desc">A small, family-run accountancy practice based in Wolverhampton with over 34 years of experience serving clients across the United Kingdom.</p></div><div class="footer-col"><div class="footer-col-title">Services</div><a href="services">Tax Planning</a><a href="services">Annual Accounts</a><a href="services">VAT Returns</a><a href="services">Payroll</a><a href="services">Bookkeeping</a><a href="services">Consultancy</a></div><div class="footer-col"><div class="footer-col-title">Company</div><a href="about">About Us</a><a href="faq">FAQ</a><a href="responsibility">Corporate Responsibility</a><a href="/#anytax">AnyTax</a></div><div class="footer-col"><div class="footer-col-title">Contact</div><p>9 Church St, Wolverhampton<br>WV11 1SR, United Kingdom</p><a href="tel:01902451222">01902 451 222</a><a href="mailto:mail@trilogyltd.co.uk">mail@trilogyltd.co.uk</a></div></div><div class="footer-bottom"><span class="footer-copy">&copy; 2025 Trilogy Accountancy Services Limited. All rights reserved.</span></div></div></footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
+    function toggleMobile() { document.getElementById('mobileNav').classList.toggle('open'); document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : ''; }
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 60); observer.unobserve(entry.target); } }); }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
